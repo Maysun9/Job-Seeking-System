@@ -21,11 +21,7 @@ public class JobApplicationController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> ApplyJobApplication(@RequestBody @Valid JobApplication jobApplication, Errors errors) {
-        if (errors.hasErrors()) {
-            String message = errors.getFieldError().getDefaultMessage();
-            return ResponseEntity.status(400).body(message);
-        }
+    public ResponseEntity<?> ApplyJobApplication(@RequestBody @Valid JobApplication jobApplication) {
         jobApplicationService.ApplyJobApplication(jobApplication);
             return ResponseEntity.status(200).body(new ApiResponse("Job Application submitted successfully"));
     }
