@@ -22,21 +22,13 @@ public class JobPostController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addJobPost(@RequestBody @Valid JobPost jobPost, Errors errors) {
-        if (errors.hasErrors()) {
-            String message = errors.getFieldError().getDefaultMessage();
-            return ResponseEntity.status(400).body(message);
-        }
+    public ResponseEntity<?> addJobPost(@RequestBody @Valid JobPost jobPost) {
         jobPostService.addJobPost(jobPost);
         return ResponseEntity.status(200).body(new ApiResponse("Job Post added successfully"));
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable Integer id, @RequestBody @Valid JobPost jobPost, Errors errors) {
-        if (errors.hasErrors()) {
-            String message = errors.getFieldError().getDefaultMessage();
-            return ResponseEntity.status(400).body(message);
-        }
+    public ResponseEntity<?> updateJobPost(@PathVariable Integer id, @RequestBody @Valid JobPost jobPost) {
         jobPostService.updateJobPost(id, jobPost);
         return ResponseEntity.status(200).body(new ApiResponse("Job Post updated successfully"));
     }
